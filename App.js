@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase/app';
 import { View, Text } from 'react-native';
-import Register from './Components/auth/Register';
+
 const firebaseConfig = {
   apiKey: "AIzaSyDzx77dioJ3IWsb2CYFDNlAf2kPTPpoBRk",
   authDomain: "autht-8647f.firebaseapp.com",
@@ -17,17 +17,27 @@ if (!firebase.apps.length) {
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+//screen
+import Add from './Components/main/Add';
+import MainScreen from './Components/Main';
+import Register from './Components/auth/Register';
 import LandingScreen from './Components/auth/Landing';
-import { render } from 'react-dom';
 import Login from './Components/auth/Login';
+//redux imports
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import Reducers from './redux/reducers';
+import thunk from 'redux-thunk';
+
+const store = createStore(Reducers, applyMiddleware(thunk));
+
 const Stack = createStackNavigator();
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
+
       loaded: false
     }
   }
@@ -60,7 +70,7 @@ export default class App extends React.Component {
         </View>
       )
     }
-    if (!loggedIn) {
+    else if (!loggedIn) {
 
       return (
         <NavigationContainer>
@@ -73,10 +83,15 @@ export default class App extends React.Component {
 
       );
     }
-    return (
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <Text>Logged In</Text>
-      </View>
+    else return (
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Main"  >
+            <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Add" component={Add} options={{ headerShown: true }} />
+          </Stack.Navigator>
+        </NavigationContainer >
+      </Provider>
     )
   }
 }
