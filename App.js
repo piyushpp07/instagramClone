@@ -3,12 +3,12 @@ import firebase from 'firebase/app';
 import { View, Text } from 'react-native';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDzx77dioJ3IWsb2CYFDNlAf2kPTPpoBRk",
-  authDomain: "autht-8647f.firebaseapp.com",
-  projectId: "autht-8647f",
-  storageBucket: "autht-8647f.appspot.com",
-  messagingSenderId: "244082703409",
-  appId: "1:244082703409:web:31b709dc49599ac0c26910"
+  apiKey: "AIzaSyA_K9trF0iXJ4HRKBrtpKCu6a0WE464fos",
+  authDomain: "mobile-6359c.firebaseapp.com",
+  projectId: "mobile-6359c",
+  storageBucket: "mobile-6359c.appspot.com",
+  messagingSenderId: "530505614502",
+  appId: "1:530505614502:web:d3da677bd98a0e96bde067"
 };
 
 if (!firebase.apps.length) {
